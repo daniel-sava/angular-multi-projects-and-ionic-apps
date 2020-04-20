@@ -16,12 +16,12 @@
   - 📂 angular-app1
   - 📂 angular-app2
   - 📂 angular-app3
+
   - 📂 ionic-app1
   - 📂 ionic-app2
   
-  - 📂 libs
-    - 📂 library1
-    - 📂 library2
+  - 📂 library1
+  - 📂 library2
 📂 www
 📂 resources
 📂 platforms
