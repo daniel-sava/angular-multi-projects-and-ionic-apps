@@ -88,7 +88,8 @@ Now we have two options:<br/>
   ```
   npm install @ionic/angular-toolkit
   ```
-  You have to use the links from Ionic, provided below in the **References** section and copy the highlighted code from each link to `angular.json` for the application you want to transform into an Ionic App. Add styling under `styles`, ionicons under `assets` and build tasks right after `e2e` in `angular.json`. Make sure to replace the `${projectName}` with the actual project name of the angular application for the build tasks.
+  You have to use the links from Ionic, provided below in the **References** section and copy the highlighted code from each link to `angular.json` for the application you want to transform into an Ionic App. Add styling under `styles`, ionicons under `assets` and build tasks right after `e2e` in `angular.json`. Make sure to replace the `${projectName}` with the actual project name of the angular application for the build tasks.<br/>
+  You will also have to create the `theme folder` with `variables.scss` under the project yourself.
 
 **STEP 4:**
 Create the `ionic.config.json` in the root folder using the commad:
