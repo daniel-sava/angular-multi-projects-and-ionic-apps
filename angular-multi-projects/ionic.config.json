@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "ionic-app1": {
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    },
+    "ionic-app2": {
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    }
+  }
+}
