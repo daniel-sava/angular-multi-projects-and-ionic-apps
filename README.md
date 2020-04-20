@@ -89,14 +89,118 @@ Now we have two options:<br/>
   npm install @ionic/angular-toolkit
   ```
   You have to use the links from Ionic, provided below in the **References** section and copy the highlighted code from each link to `angular.json` for the application you want to transform into an Ionic App. Add styling under `styles`, ionicons under `assets` and build tasks right after `e2e` in `angular.json`. Make sure to replace the `${projectName}` with the actual project name of the angular application for the build tasks.<br/>
-  You will also have to create the `theme folder` with `variables.scss` under the project yourself.
+  You will also have to create the `theme folder` with `variables.scss` and the `global.scss` under the project yourself.
+  
+**NOTE:**<br/>
+Whatever you choose from the options above, for each Ionic App, in the `angular.json` you should have something similar with this:
+```
+  "ionic-app1": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ionic-app1",
+      "sourceRoot": "projects/ionic-app1/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "www",
+            ...
+            "assets": [
+              ...,
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "projects/ionic-app1/src/styles.scss",
+              "node_modules/@ionic/angular/css/normalize.css",
+              "node_modules/@ionic/angular/css/structure.css",
+              "node_modules/@ionic/angular/css/typography.css",
+              "node_modules/@ionic/angular/css/core.css",
+              "node_modules/@ionic/angular/css/padding.css",
+              "node_modules/@ionic/angular/css/float-elements.css",
+              "node_modules/@ionic/angular/css/text-alignment.css",
+              "node_modules/@ionic/angular/css/text-transformation.css",
+              "node_modules/@ionic/angular/css/flex-utils.css",
+              "projects/ionic-app1/src/theme/variables.scss",
+              "projects/ionic-app1/src/global.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            ...
+          }
+        },
+        "serve": {
+          ...
+        },
+        "extract-i18n": {
+          ...
+        },
+        "test": {
+          ...
+        },
+        "lint": {
+          ...
+        },
+        "e2e": {
+          ...
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "ionic-app1:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ionic-app1:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "ionic-app1:ionic-cordova-build",
+            "devServerTarget": "ionic-app1:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "ionic-app1:ionic-cordova-build:production",
+              "devServerTarget": "ionic-app1:serve:production"
+            }
+          }
+        }
+      }
+    }
+```
 
 **STEP 4:**
-Create the `ionic.config.json` in the root folder using the commad:
+Create the `ionic.config.json` manually in the root folder like this:
 ```
-ionic init
+{
+  "projects": {
+    "ionic-app1": {
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    },
+    "ionic-app2": {
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    }
+  }
+}
 ```
-When you are prompted to provide the project name, just insert the name of the angular application you have started to transform in an Ionic Application.
 
 **FINAL STEP**
 After you complete all the other steps, if you use `ionic serve` everything should work as expected, but make sure to provide the project you are trying serve, otherwise it won't work.<br/>
@@ -106,7 +210,8 @@ ionic serve --project ionic-app1
 ```
 You can also run the Ionic App on the device. Let's say you are trying to run the app on an Android Device, you should do it like this:
 ```
-ionic cordova platform add android
+ionic integrations enable cordova --add --project ionic-app1
+ionic cordova platform add android --add --project ionic-app1
 ionic cordova run android --project ionic-app1
 ```
 Always make sure to mention the project you are trying to run using Ionic, because you are in a multi-project setup, it won't know which project to run.
