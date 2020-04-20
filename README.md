@@ -13,15 +13,15 @@
 ```
 📁 node_modules
 📂 projects
-  - 📂 angular-app-1
-  - 📂 angular-app-2
-  - 📂 angular-app-3
-  - 📂 ionic-app-1
-  - 📂 ionic-app-2
+  - 📂 angular-app1
+  - 📂 angular-app2
+  - 📂 angular-app3
+  - 📂 ionic-app1
+  - 📂 ionic-app2
   
   - 📂 libs
-    - 📂 library-1
-    - 📂 library-2
+    - 📂 library1
+    - 📂 library2
 📂 www
 📂 resources
 📂 platforms
@@ -47,7 +47,7 @@ ng new angular-multi-projects --createApplication=false
 Let's create the first Angular Application
 
 ```
-ng generate application angular-app-1
+ng generate application angular-app1
 ```
 
 **NOTE:** You can create the other Angular Applications using the same command provided above. All of the applications will be created under `projects folder` and they will also be added to the `angular.json` file, which you can find in the root folder.
@@ -55,15 +55,15 @@ ng generate application angular-app-1
 **STEP 3:**
 Create the Ionic Apps<br/>
 #### **WRONG WAY**<br/>
-For creating the Ionic apps we **WON'T** use the `ionic start ionic-app-1` command. This command will create a new project with all the default files a new angular project has (`angular.json`, `package.json`, etc.) in the workspace folder (the root folder we created in **STEP 1**).<br/>
-Also, if you want to keep the structure presented above, it **IS NOT A GOOD IDEA** to change the current working directory to projects folder (`cd projects`) and create there the Ionic Applications using (`ionic start ionic-app-1`). This will create the Ionic Applications as I mentioned above, but in this case they will get created under the projects folder.
+For creating the Ionic apps we **WON'T** use the `ionic start ionic-app1` command. This command will create a new project with all the default files a new angular project has (`angular.json`, `package.json`, etc.) in the workspace folder (the root folder we created in **STEP 1**).<br/>
+Also, if you want to keep the structure presented above, it **IS NOT A GOOD IDEA** to change the current working directory to projects folder (`cd projects`) and create there the Ionic Applications using (`ionic start ionic-app1`). This will create the Ionic Applications as I mentioned above, but in this case they will get created under the projects folder.
 
 #### **CORRECT WAY**<br/>
 If we want to make the Ionic Apps live in harmony next to simple Angular Apps we need to `manually install` Ionic on a basic Angular App.<br/>
 This being said, the Ionic Apps will be created using the same command we used for creating basic Angular Applications.
 
 ```
-ng generate application ionic-app-1
+ng generate application ionic-app1
 ```
 
 Now we have two options:<br/>
@@ -101,12 +101,12 @@ When you are prompted to provide the project name, just insert the name of the a
 After you complete all the other steps, if you use `ionic serve` everything should work as expected, but make sure to provide the project you are trying serve, otherwise it won't work.<br/>
 Correct usage:
 ```
-ionic serve --project ionic-app-1
+ionic serve --project ionic-app1
 ```
 You can also run the Ionic App on the device. Let's say you are trying to run the app on an Android Device, you should do it like this:
 ```
 ionic cordova platform add android
-ionic cordova run android --project ionic-app-1
+ionic cordova run android --project ionic-app1
 ```
 Always make sure to mention the project you are trying to run using Ionic, because you are in a multi-project setup, it won't know which project to run.
 
@@ -114,7 +114,7 @@ Always make sure to mention the project you are trying to run using Ionic, becau
 Even if `ionic serve` will work as expected when you are trying to view the project in the browser, you should know that when you are trying to build and run the project for android using cordova, you might get an error when the application starts (even if the application builds without error).<br/>
 The error will look something like `CONNECTION ERROR` and something related to `file:///android_asset/www/index.html`, well don't worry. This is because we created the Ionic App as an Angular Application in the first place. In `angular.json` in the project we are transforming in an Ionic App check what is inside `architect -> build -> builder -> options -> outputPath`
 
-If you see the value of `"outputPath": "dist/ionic-app-1"` then this is the problem. You should change the value of `outputPath` to `www` like this `"outputPath": "www"`.
+If you see the value of `"outputPath": "dist/ionic-app1"` then this is the problem. You should change the value of `outputPath` to `www` like this `"outputPath": "www"`.
 
 ## References
 https://stackoverflow.com/a/55496931/5930816
